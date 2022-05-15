@@ -23,7 +23,7 @@ let successor = null;
 function reverseBetween(head: ListNode | null, left: number, right: number): ListNode | null {
   // base case 
   if (left <= 1) {
-    return reverseN(head, right - left + 1);
+    return reverseX(head, right - left + 1);
   }
   // recursion relation
   head.next = reverseBetween(head.next, left - 1, right - 1);
@@ -32,14 +32,14 @@ function reverseBetween(head: ListNode | null, left: number, right: number): Lis
 };
 
 
-function reverseN(head: ListNode, n: number): ListNode {
+function reverseX(head: ListNode, n: number): ListNode {
   // base case
   if(n == 1 || head == null || head.next == null){
     successor = head.next;
     return head;
   }
   // recursion
-  let lastNode = reverseN(head.next, n-1);
+  let lastNode = reverseX(head.next, n-1);
   head.next.next = head; /// 很关键 不能用lastNode.next 因为lastNode.next不是head.next
   head.next = successor;
   return lastNode;
