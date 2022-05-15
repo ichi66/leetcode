@@ -18,37 +18,67 @@
  */
 
 
+let successor = null;
 
 function reverseBetween(head: ListNode | null, left: number, right: number): ListNode | null {
-  let dummy: ListNode = new ListNode(-1);
-  dummy.next = head;
-  let i = 0;
-  let p = dummy;
-  while (i < left - 1) {
-    p = p.next;
-    i++;
+  // base case 
+  if (left <= 1) {
+    return reverseN(head, right - left + 1);
   }
-  if (p.next == null) {
-    return head;
-  }
-  let slow = p.next;
-  let temp = slow;
-  let fast = p.next.next;
-  let j = 0;
-  while (j < right - left && fast != null) {
-    let temp = fast.next;
-    fast.next = slow;
-    slow = fast;
-    fast = temp;
-    j++;
-  }
-  p.next = slow;
-  temp.next = fast;
-
-  return dummy.next;
-
+  // recursion relation
+  head.next = reverseBetween(head.next, left - 1, right - 1);
+  return head;
 
 };
+
+
+function reverseN(head: ListNode, n: number): ListNode {
+  // base case
+  if(n == 1 || head == null || head.next == null){
+    successor = head.next;
+    return head;
+  }
+  // recursion
+  let lastNode = reverseN(head.next, n-1);
+  head.next.next = head; /// 很关键 不能用lastNode.next 因为lastNode.next不是head.next
+  head.next = successor;
+  return lastNode;
+
+}
+
+
+
+
+// function reverseBetween(head: ListNode | null, left: number, right: number): ListNode | null {
+//   let dummy: ListNode = new ListNode(-1);
+//   dummy.next = head;
+//   let i = 0;
+//   let p = dummy;
+//   while (i < left - 1) {
+//     p = p.next;
+//     i++;
+//   }
+//   if (p.next == null) {
+//     return head;
+//   }
+//   let slow = p.next;
+//   let temp = slow;
+//   let fast = p.next.next;
+//   let j = 0;
+//   while (j < right - left && fast != null) {
+//     let temp = fast.next;
+//     fast.next = slow;
+//     slow = fast;
+//     fast = temp;
+//     j++;
+//   }
+//   p.next = slow;
+//   temp.next = fast;
+
+//   return dummy.next;
+
+
+// };
 
 /// 递归
 // let successor = null;

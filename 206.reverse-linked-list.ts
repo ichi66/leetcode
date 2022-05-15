@@ -19,32 +19,30 @@
 
 
 // recurtion
-function reverseList(head: ListNode | null): ListNode | null {
-  if (head == null || head.next == null) {
-    return head;
-  }
-  let last: ListNode = reverseList(head.next);
-  head.next.next = head;
-  head.next = null;
-  return last;
-};
-
-
-// /// iteration
 // function reverseList(head: ListNode | null): ListNode | null {
-//   if(head == null){
+//   if (head == null || head.next == null) {
 //     return head;
 //   }
-//   let slow : ListNode = head;
-//   let fast : ListNode = head.next;
-//   slow.next = null;
-//   while(fast != null){
-//     let temp = fast.next;
-//     fast.next = slow;
-//     slow = fast;
-//     fast = temp;
-//   }
-//   return slow;
+//   let last: ListNode = reverseList(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//   return last;
 // };
+
+
+/// iteration
+function reverseList(head: ListNode | null): ListNode | null {
+  let prev = null;
+  let next = head;
+  let cur = head;
+  while(next != null){
+    next = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = next;
+    
+  }
+  return prev;
+};
 // @lc code=end
 
