@@ -17,38 +17,62 @@
  * }
  */
 
+
+let left = new ListNode(-1);
 function isPalindrome(head: ListNode | null): boolean {
-  let slow = head;
-  let fast = head;
-  while(fast !=null && fast.next!=null){
-    slow = slow.next;
-    fast = fast.next.next;
-  }
-  let rightHead = reverse(slow);
-  let leftHead = head;
-  while(rightHead !=null && leftHead != null){
-    if(rightHead.val != leftHead.val){
-      return false;
-    }
-    rightHead = rightHead.next;
-    leftHead = leftHead.next;
-  }
-  return true;
+  left = head;
+  reverseCheck(head);
+  return 
 };
 
-
-function reverse(head){
-  let prev = null;
-  let next = head;
-  let cur = head;
-  while(next != null){
-    next = cur.next;
-    cur.next = prev;
-    prev = cur;
-    cur = next;
+function reverseCheck(right: ListNode): boolean {
+  // base case
+  if(right == null){
+    return true;
   }
-  return prev;
+  let res = reverseCheck(right.next);
+  res = res && left.val == right.val;
+  left = left.next;
+  return res;
 }
+
+
+
+
+
+
+// function isPalindrome(head: ListNode | null): boolean {
+//   let slow = head;
+//   let fast = head;
+//   while(fast !=null && fast.next!=null){
+//     slow = slow.next;
+//     fast = fast.next.next;
+//   }
+//   let rightHead = reverse(slow);
+//   let leftHead = head;
+//   while(rightHead !=null && leftHead != null){
+//     if(rightHead.val != leftHead.val){
+//       return false;
+//     }
+//     rightHead = rightHead.next;
+//     leftHead = leftHead.next;
+//   }
+//   return true;
+// };
+
+
+// function reverse(head){
+//   let prev = null;
+//   let next = head;
+//   let cur = head;
+//   while(next != null){
+//     next = cur.next;
+//     cur.next = prev;
+//     prev = cur;
+//     cur = next;
+//   }
+//   return prev;
+// }
 
 
 /// 递归
