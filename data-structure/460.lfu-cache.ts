@@ -11,7 +11,7 @@ class LFUCache {
     size: number = 0;
     keyToVal:  Map<number, number>;
     keyToFrq : Map<number, number>;
-    freqToKey: Map<number, Map<number,boolean> >;
+    freqToKey: Map<number, Set<number>>;
     constructor(capacity: number) {
       this.capacity = capacity;
       this.keyToVal = new Map();
@@ -63,7 +63,7 @@ class LFUCache {
       this.size--;
       let minFreqMap = this.freqToKey.get(this.minFreq);
       let key = null;
-      for (let [k, _] of minFreqMap) {
+      for (let k of minFreqMap) {
         minFreqMap.delete(k);
         key = k;
         /// only delete the first key
@@ -87,9 +87,9 @@ class LFUCache {
 
       // / add key to newFreq map in freqToKey map
       if(!this.freqToKey.has(newFreq)){
-        this.freqToKey.set(newFreq, new Map<number, boolean>());
+        this.freqToKey.set(newFreq, new Set<number>());
       }
-      this.freqToKey.get(newFreq).set(key, true);
+      this.freqToKey.get(newFreq).add(key);
 
       // only update freq here
       if(prevFreq ==  this.minFreq && this.freqToKey.get(prevFreq).size == 0){
