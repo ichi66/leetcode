@@ -1,3 +1,4 @@
+package trie;
 class TrieMap<V> {
   // ASCII 码个数
   private static final int R = 256;
