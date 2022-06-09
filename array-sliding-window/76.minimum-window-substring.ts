@@ -5,6 +5,48 @@
  */
 
 // @lc code=start
+
+
+
+// function minWindow(s: string, t: string): string {
+//   const expectedLength = t.length;
+//   let valid = 0;
+//   let expectedCharMap =  new Map<string, number>();
+//   let charMap =  new Map<string, number>();
+//   let substring = null;
+//   for(let el of t){
+//     expectedCharMap.set(el, expectedCharMap.has(el) ? (expectedCharMap.get(el) + 1) : 1);
+//   }
+//   let left = 0;
+//   let right = 0;
+//   while(right < s.length){
+//     const c = s[right];
+//     charMap.set(c,  charMap.has(c) ? (charMap.get(c) + 1) : 1 );
+//     if(expectedCharMap.has(c) &&  charMap.get(c) <=  expectedCharMap.get(c)){
+//       valid++;
+//     }
+//     right++;
+//     while(valid == expectedLength){
+//       if(substring  === null || right - left < substring.length){
+//         substring = s.substring(left,right);
+//       }
+
+//       const d = s[left]
+//       charMap.set(d,  charMap.get(d) - 1);
+//       if(expectedCharMap.has(d) &&  charMap.get(d) <  expectedCharMap.get(d)){
+//         valid--;
+//       }
+//       left++;
+//     }
+//   }
+
+//   return substring === null ? '' : substring;
+// };
+
+
+
+
+
 function minWindow(s: string, t: string): string {
   let tCount = new Map<string, number>()
   for (let i = 0; i < t.length; i++) {
@@ -45,6 +87,6 @@ function minWindow(s: string, t: string): string {
 
   return ans[0] == -1 ? '' : s.substring(ans[1], ans[2] + 1);
 };
-// console.log(minWindow('ADOBECODEBANC', "ABC"));
+console.log(minWindow('ADOBECODEBANC', "ABC"));
 // @lc code=end
 

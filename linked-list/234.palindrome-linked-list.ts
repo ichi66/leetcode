@@ -18,8 +18,7 @@
  */
 
 
-<<<<<<< HEAD
-  let left = new ListNode(-1);
+let left = new ListNode(-1);
 
  function isPalindrome(head: ListNode | null): boolean {
  left = head;
@@ -29,21 +28,10 @@
 
 
 function checkPair(right): boolean {
-=======
-let left = new ListNode(-1);
-function isPalindrome(head: ListNode | null): boolean {
-  left = head;
-  reverseCheck(head);
-  return 
-};
-
-function reverseCheck(right: ListNode): boolean {
->>>>>>> 03e763ac4d2d389da0b92d040bfce6cab16cff9e
   // base case
   if(right == null){
     return true;
   }
-<<<<<<< HEAD
 
   let res :  boolean = checkPair(right.next);
   res = res && left.val == right.val;
@@ -51,22 +39,10 @@ function reverseCheck(right: ListNode): boolean {
   return res;
 
 
-=======
-  let res = reverseCheck(right.next);
-  res = res && left.val == right.val;
-  left = left.next;
-  return res;
->>>>>>> 03e763ac4d2d389da0b92d040bfce6cab16cff9e
 }
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 03e763ac4d2d389da0b92d040bfce6cab16cff9e
 // function isPalindrome(head: ListNode | null): boolean {
 //   let slow = head;
 //   let fast = head;

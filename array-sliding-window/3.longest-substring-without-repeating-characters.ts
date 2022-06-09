@@ -28,20 +28,44 @@
 // };
 
 
-// answer2 
 function lengthOfLongestSubstring(s: string): number {
-  let startIndex: number = 0;
-  let longestLength: number = 0;
-  let tempList = new Map<string, number>();
-  for (let i = 0; i < s.length; i++) {
-    if (tempList.has(s[i])) {
-      startIndex = Math.max(tempList.get(s[i]) + 1, startIndex);
+  let left = 0;
+  let right = 0;
+  let longestSub = 0;
+  let charMap = new Map<string, number>();
+  while (right < s.length) {
+    charMap.set(s[right], charMap.has(s[right]) ? charMap.get(s[right]) + 1 : 1);
+    right++;
+    // needs shrink 
+    while (charMap.size < right - left) {
+      charMap.set(s[left], charMap.get(s[left]) - 1);
+      if (charMap.get(s[left]) == 0) {
+        charMap.delete(s[left]);
+      }
+      left++;
     }
-    tempList.set(s[i], i);
-    longestLength = Math.max(longestLength, i - startIndex + 1);
+
+    // match criteria!!
+    longestSub = Math.max(longestSub, right-left);
   }
-  return longestLength;
+  return longestSub;
 };
+
+
+// answer2 
+// function lengthOfLongestSubstring(s: string): number {
+//   let startIndex: number = 0;
+//   let longestLength: number = 0;
+//   let tempList = new Map<string, number>();
+//   for (let i = 0; i < s.length; i++) {
+//     if (tempList.has(s[i])) {
+//       startIndex = Math.max(tempList.get(s[i]) + 1, startIndex);
+//     }
+//     tempList.set(s[i], i);
+//     longestLength = Math.max(longestLength, i - startIndex + 1);
+//   }
+//   return longestLength;
+// };
 // console.log(lengthOfLongestSubstring("abcabcbb"))
 
 
